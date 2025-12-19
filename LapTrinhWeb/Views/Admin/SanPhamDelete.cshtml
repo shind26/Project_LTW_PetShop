@@ -1,0 +1,40 @@
+﻿@model tblSanPham
+
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="alert alert-danger">
+    <strong>Cảnh báo!</strong> Bạn có chắc chắn muốn xóa sản phẩm này không? Hành động này cũng sẽ xóa dữ liệu tồn kho liên quan.
+</div>
+
+<div class="card shadow mb-4 border-left-danger">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-danger">Xóa sản phẩm: @Model.TenSP</h6>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Tên sản phẩm</dt>
+            <dd class="col-sm-9">@Model.TenSP</dd>
+
+            <dt class="col-sm-3">Loại</dt>
+            <dd class="col-sm-9">@Model.LoaiSanPham</dd>
+
+            <dt class="col-sm-3">Giá bán</dt>
+            <dd class="col-sm-9">@string.Format("{0:N0} VNĐ", Model.GiaBan)</dd>
+
+            <dt class="col-sm-3">Nhà cung cấp</dt>
+            <dd class="col-sm-9">@(Model.tblNhaCungCap?.TenNCC)</dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+                <a href="@Url.Action("SanPham")" class="btn btn-secondary">Hủy bỏ</a>
+            </div>
+        }
+    </div>
+</div>

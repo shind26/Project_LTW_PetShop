@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "Dashboard Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <h2>🏠 Dashboard Admin</h2>
+
+    <!-- Thống kê -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Tổng sản phẩm</h5>
+                    <h2>@ViewBag.TongSanPham</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Thú cưng</h5>
+                    <h2>@ViewBag.TongThuCung</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Phụ kiện</h5>
+                    <h2>@ViewBag.TongPhuKien</h2>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Khách hàng</h5>
+                    <h2>@ViewBag.TongKhachHang</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu chức năng -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h4>Chức năng quản lý</h4>
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <a href="@Url.Action("SanPham")" class="btn btn-primary btn-lg w-100">
+                        📦 Quản lý sản phẩm
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="@Url.Action("KhachHang")" class="btn btn-success btn-lg w-100">
+                        👥 Quản lý khách hàng
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="@Url.Action("DonHang")" class="btn btn-info btn-lg w-100">
+                        🛒 Quản lý đơn hàng
+                    </a>
+                </div>
+                <div class="col-md-3 mb-3">
+                    <a href="@Url.Action("NhaCungCap")" class="btn btn-warning btn-lg w-100">
+                        🚚 Quản lý nhà cung cấp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

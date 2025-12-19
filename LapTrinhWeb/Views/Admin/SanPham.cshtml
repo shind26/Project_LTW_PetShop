@@ -1,0 +1,342 @@
+﻿
+@model List<tblSanPham>
+
+@{
+    ViewBag.Title = "Quản lý sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2><i class="fas fa-box"></i> Quản lý sản phẩm</h2>
+        <a href="@Url.Action("SanPhamCreate")" class="btn btn-success">
+            <i class="fas fa-plus"></i> Thêm sản phẩm mới
+        </a>
+    </div>
+
+    <!-- Thông báo -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            @TempData["SuccessMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <!-- Form tìm kiếm -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Tìm kiếm & Lọc</h6>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("SanPham", "Admin", FormMethod.Get, new { @class = "form-inline" }))
+            {
+                <div class="form-group mr-3 mb-2">
+                    <label class="mr-2">Loại sản phẩm:</label>
+                    @Html.DropDownList("loaiFilter", ViewBag.LoaiSanPhamList as SelectList,
+                        new { @class = "form-control form-control-sm" })
+                </div>
+
+                <div class="form-group mr-3 mb-2">
+                    <input type="text" name="search" class="form-control form-control-sm"
+                           placeholder="Tìm theo tên, mô tả..." value="@ViewBag.Search">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm mb-2 mr-2">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+                <a href="@Url.Action("SanPham")" class="btn btn-secondary btn-sm mb-2">
+                    <i class="fas fa-redo"></i> Xem tất cả
+                </a>
+            }
+        </div>
+    </div>
+
+    <!-- Bảng sản phẩm -->
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Ảnh</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Loại</th>
+                            <th>Giá</th>
+                            <th>Danh mục</th>
+                            <th>Tồn kho</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>#@item.MaSP</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item.AnhDaiDien))
+                                        {
+                                            <img src="~/Content/HinhAnh/@item.AnhDaiDien"
+                                                 alt="@item.TenSP"
+                                                 style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;"
+                                                 onerror="this.style.display='none'">
+                                        }
+                                        else
+                                        {
+                                            <div class="text-center text-muted">
+                                                <i class="fas fa-image fa-2x"></i>
+                                            </div>
+                                        }
+                                    </td>
+                                    <td>
+                                        <strong>@item.TenSP</strong>
+                                        @if (!string.IsNullOrEmpty(item.MoTa) && item.MoTa.Length > 50)
+                                        {
+                                            <br>
+                                            <small class="text-muted">@item.MoTa.Substring(0, 50)...</small>
+                                        }
+                                        @if (item.LoaiSanPham == "Pet")
+                                        {
+                                            <br>
+                                            <small>
+                                                @if (!string.IsNullOrEmpty(item.GioiTinh))
+                                                {
+                                                    <span class="badge badge-info">@item.GioiTinh</span>
+                                                }
+                                                @if (item.NgaySinh.HasValue)
+                                                {
+                                                    <span class="badge badge-secondary">@item.NgaySinh.Value.ToString("dd/MM/yyyy")</span>
+                                                }
+                                            </small>
+                                        }
+                                    </td>
+                                    <td>
+
+                                        @{
+                                            var loai = item.LoaiSanPham ?? "";
+                                            loai = loai.Trim();
+                                        }
+
+                                        @if (string.IsNullOrEmpty(loai))
+                                        {
+                                            <span class="badge badge-secondary">Chưa phân loại</span>
+                                        }
+                                        else if (loai.Equals("Pet", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            <span class="badge badge-primary" style="background-color: #4e73df; color: white;">
+                                                <i class="fas fa-paw"></i> Thú cưng
+                                            </span>
+                                        }
+                                        else if (loai.Equals("Accessory", StringComparison.OrdinalIgnoreCase))
+                                        {
+                                            <span class="badge badge-success" style="background-color: #1cc88a; color: white;">
+                                                <i class="fas fa-bone"></i> Phụ kiện
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-warning">@loai</span>
+                                        }
+                                    </td>
+                                    <td class="text-danger font-weight-bold">
+                                        @(item.GiaBan?.ToString("N0") ?? "0") đ
+                                    </td>
+                                    <td>
+                                        @{
+                                            // Lấy thông tin danh mục
+                                            var danhMuc = item.tblDanhMuc;
+                                            var tenDanhMuc = danhMuc?.TenDanhMuc;
+                                            var maDanhMuc = danhMuc?.MaDanhMuc;
+                                        }
+                                        @if (danhMuc != null && !string.IsNullOrEmpty(tenDanhMuc))
+                                        {
+                                            <span class="badge" style="background-color: #6c757d; color: white; padding: 5px 10px;">
+                                                @tenDanhMuc
+                                            </span>
+                                        }
+                                        else if (item.MaDanhMuc.HasValue)
+                                        {
+                                            <span class="badge badge-warning">
+                                                Mã: @item.MaDanhMuc.Value
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-secondary">Chưa phân loại</span>
+                                        }
+                                    </td>
+
+                                  
+                                    <td>
+                                        @{
+                                            var isPet = item.LoaiSanPham == "Pet";
+                                            var soLuong = item.tblTonKho?.SoLuongTon ?? 0;
+                                        }
+
+                                        @if (isPet)
+                                        {
+                                            <!-- Style giống Danh mục -->
+                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                <div style="width: 8px; height: 8px; background: #ffc107; border-radius: 50%;"></div>
+                                                <span style="color: #856404; font-weight: 600;">
+                                                    Có sẵn
+                                                </span>
+                                            </div>
+                                            <span class="badge badge-warning" style="margin-top: 2px; font-size: 11px;">
+                                                <i class="fas fa-paw"></i> Thú cưng
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <!-- Phụ kiện -->
+                                            <div style="display: flex; align-items: center; gap: 5px;">
+                                                <div style="width: 8px; height: 8px; background: @(soLuong > 0 ? "#28a745" : "#dc3545"); border-radius: 50%;"></div>
+                                                <span style="color: @(soLuong > 0 ? "#155724" : "#721c24"); font-weight: 600;">
+                                                    @soLuong cái
+                                                </span>
+                                            </div>
+                                            <span class="badge @(soLuong > 0 ? "badge-success" : "badge-danger")" style="margin-top: 2px; font-size: 11px;">
+                                                <i class="fas fa-box"></i> @(soLuong > 0 ? "Còn hàng" : "Hết hàng")
+                                            </span>
+                                        }
+                                    </td>
+                                    <!-- Cột Trạng thái -->
+                                    <td>
+                                        @{
+                                            var trangThai = item.tblTonKho?.TrangThai;
+                                            var isPetType = item.LoaiSanPham == "Pet"; 
+
+                                            // Xác định style dựa trên trạng thái
+                                            string displayText;
+                                            string badgeColor;
+                                            string icon;
+
+                                            if (string.IsNullOrEmpty(trangThai))
+                                            {
+                                                displayText = isPetType ? "Sẵn sàng" : "Có hàng";
+                                                badgeColor = isPetType ? "#ffc107" : "#28a745";
+                                                icon = isPetType ? "fas fa-paw" : "fas fa-check-circle";
+                                            }
+                                            else
+                                            {
+                                                displayText = trangThai;
+                                                switch (trangThai.ToLower())
+                                                {
+                                                    case "sẵn sàng bán":
+                                                    case "có sẵn":
+                                                        badgeColor = "#28a745";
+                                                        icon = "fas fa-check-circle";
+                                                        break;
+                                                    case "đặt trước":
+                                                        badgeColor = "#17a2b8";
+                                                        icon = "fas fa-clock";
+                                                        break;
+                                                    case "đã bán":
+                                                        badgeColor = "#6c757d";
+                                                        icon = "fas fa-check-double";
+                                                        break;
+                                                    case "đang chăm sóc":
+                                                        badgeColor = "#007bff";
+                                                        icon = "fas fa-stethoscope";
+                                                        break;
+                                                    case "hết hàng":
+                                                        badgeColor = "#dc3545";
+                                                        icon = "fas fa-times-circle";
+                                                        break;
+                                                    default:
+                                                        badgeColor = "#6c757d";
+                                                        icon = "fas fa-info-circle";
+                                                        break;
+                                                }
+                                            }
+                                        }
+
+                                        <span class="badge" style="background: @badgeColor; color: white; padding: 4px 10px; border-radius: 4px; display: inline-flex; align-items: center; gap: 5px;">
+                                            <i class="@icon"></i> @displayText
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="@Url.Action("SanPhamDetails", new { id = item.MaSP })"
+                                               class="btn btn-info" title="Chi tiết">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+                                            <a href="@Url.Action("SanPhamEdit", new { id = item.MaSP })"
+                                               class="btn btn-warning" title="Sửa">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="@Url.Action("SanPhamDelete", new { id = item.MaSP })"
+                                               class="btn btn-danger" title="Xóa"
+                                               onclick="return confirm('Xóa sản phẩm @item.TenSP?');">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center text-muted py-4">
+                                    <i class="fas fa-box-open fa-3x mb-3"></i>
+                                    <p>Không có sản phẩm nào</p>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    public string GetStatusClass(string status)
+    {
+        switch (status)
+        {
+            case "Sẵn sàng bán": return "badge-success";
+            case "Đặt trước": return "badge-warning";
+            case "Đã bán": return "badge-secondary";
+            default: return "badge-light";
+        }
+    }
+}
+
+<style>
+    .table th {
+        background-color: #4e73df;
+        color: white;
+        font-weight: 600;
+    }
+
+    .badge {
+        padding: 0.4em 0.6em;
+        font-size: 85%;
+    }
+
+    .btn-group .btn {
+        padding: 0.25rem 0.5rem;
+    }
+</style>

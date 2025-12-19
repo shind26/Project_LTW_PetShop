@@ -1,0 +1,23 @@
+﻿@model tblHoaDon
+@{
+    ViewBag.Title = "CapNhat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Cập nhật đơn hàng #@Model.MaHD</h2>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.MaHD)
+    <div class="form-group">
+        <label>Tình trạng đơn hàng</label>
+        @Html.DropDownListFor(m => m.TinhTrang, (SelectList)ViewBag.TinhTrang, "-- chọn tình trạng --", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Địa chỉ giao hàng</label>
+        @Html.TextBoxFor(m => m.DiaChiGiaoHang, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Đã thanh toán?</label><br /> @Html.CheckBox("DaThanhToan", Model.DaThanhToan ?? false)
+    </div>
+    <button class="btn btn-success">Lưu thay đổi</button>
+}

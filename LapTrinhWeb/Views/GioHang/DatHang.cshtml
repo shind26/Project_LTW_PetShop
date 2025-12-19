@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_LayoutBH.cshtml";
+    var kh = ViewBag.KhachHang;
+    var cart = ViewBag.Cart as List<LapTrinhWeb.Models.CartItem>;
+}
+
+<div class="container py-4">
+
+    @if (TempData["LoiDatHang"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["LoiDatHang"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <h2 class="fw-bold mb-4">Xác nhận đặt hàng</h2>
+
+    <div class="row">
+        <!-- THÔNG TIN KHÁCH HÀNG -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow rounded-3">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="m-0">Thông tin khách hàng</h5>
+                </div>
+                <div class="card-body">
+                    <p><strong>Họ tên:</strong> @kh.HoTen</p>
+                    <p><strong>Email:</strong> @kh.Email</p>
+                    <p><strong>SĐT:</strong> @kh.SDT</p>
+                </div>
+            </div>
+
+            <form method="post" action="/Cart/XacNhanDatHang" class="mt-4">
+                @Html.AntiForgeryToken()
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Địa chỉ giao hàng</label>
+                    <input type="text" name="diaChiGiaoHang" class="form-control" required />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Mã giảm giá (nếu có)</label>
+                    <input type="text" name="maGiamGia" class="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Ghi chú</label>
+                    <textarea name="ghiChu" class="form-control" rows="3"></textarea>
+                </div>
+
+                <button class="btn btn-success btn-lg px-4" type="submit">Xác nhận đặt hàng</button>
+            </form>
+        </div>
+
+        <!-- GIỎ HÀNG -->
+        <div class="col-lg-6">
+            <div class="card shadow rounded-3">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="m-0">Giỏ hàng</h5>
+                </div>
+                <div class="card-body p-0">
+                    <table class="table mb-0">
+                        <thead class="table-secondary">
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th class="text-end">Tạm tính</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in cart)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@item.TenSP</strong> <br />
+                                        Số lượng: @item.SoLuong
+                                    </td>
+                                    <td class="text-end">
+                                        @String.Format("{0:N0} VNĐ", item.ThanhTien)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="card-footer text-end bg-light">
+                    <h4 class="fw-bold">
+                        Tổng tiền: @String.Format("{0:N0} VNĐ", ViewBag.TongTien)
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

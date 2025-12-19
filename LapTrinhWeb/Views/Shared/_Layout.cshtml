@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@ViewBag.Title - Shop Quần Áo</title>
+    <link href="~/Content/Css/StyleSheet1.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="#" class="logo">Pet<span>Shop</span></a>
+
+            <nav class="main-nav">
+                <a href="#">Trang chủ</a>
+
+                <div class="dropdown">
+                    <a href="#" class="dropbtn">Sản phẩm ▾</a>
+                    <div class="dropdown-content">
+                        <a href="#">...</a>
+                    </div>
+                </div>
+
+                <a href="#">Giới thiệu</a>
+                <a href="#">Liên hệ</a>
+            </nav>
+
+            <form class="search-box" action="#" method="get">
+                <input type="text" name="q" placeholder="Tìm sản phẩm..." aria-label="Tìm kiếm" />
+                <button type="submit">Tìm</button>
+            </form>
+            <div class="navbar-nav ml-auto py-0">
+                <a href="#" class="nav-item nav-link">Đăng nhập</a>
+            </div>
+        </div>
+    </header>
+    <!-- HEADER -->
+    <!-- Nội dung chính -->
+    <!-- MAIN -->
+    <main class="container site-main">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="fw-bold">Bảng điều khiển</h3>
+            <ul class="category-list">
+                <li><a href="#">DashBoard</a></li>
+                <li><a href="#">Quản lý Khách hàng</a></li>
+                <li><a href="#">Quản lý đơn hàng</a></li>
+                <li><a href="#">Quản lý Quản lý sản phẩm</a></li>
+                <li><a href="#">Quản lý mã giảm giá</a></li>
+                <li><a href="#">Cài đặt</a></li>
+            </ul>
+        </aside>
+        <!-- Sidebar -->
+        <section class="products">
+            @RenderBody()
+        </section>
+    </main>
+    <!-- MAIN -->
+    <!-- FOOTER -->
+    <footer style="background-color: #343a40; color: #f8f9fa; font-size: 0.95rem; padding: 40px 20px;">
+        <div style="max-width: 1200px; margin: auto;">
+            <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;">
+                <!-- Thông tin cửa hàng -->
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="margin-bottom: 15px;">PetShop</h4>
+                    <p>Địa chỉ: 140 Lê Trọng Tấn, Tây Thạnh, Tân Phú, TP. Hồ Chí Minh</p>
+                    <p>Điện thoại: (+84) 1800 4635</p>
+                    <p>Email: contact@petshop.vn</p>
+                </div>
+
+                <!-- Hỗ trợ khách hàng -->
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="margin-bottom: 15px;">Hỗ trợ khách hàng</h4>
+                    <p>Thứ 2 - Thứ 6: 9:00 - 20:00</p>
+                    <p>Thứ 7: 11:00 - 15:00</p>
+                    <p>Chủ nhật: Đóng cửa</p>
+                </div>
+
+                <!-- Khám phá -->
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="margin-bottom: 15px;">Khám phá</h4>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Về chúng tôi</a></p>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Sản phẩm</a></p>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Tin tức & sự kiện</a></p>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Hệ thống cửa hàng</a></p>
+                </div>
+
+                <!-- Dịch vụ -->
+                <div style="flex: 1; min-width: 200px;">
+                    <h4 style="margin-bottom: 15px;">Dịch vụ</h4>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Trung tâm trợ giúp</a></p>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Chính sách đổi trả</a></p>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Chính sách bảo mật</a></p>
+                    <p><a href="#" style="color: #f8f9fa; text-decoration: none;" onmouseover="this.style.textDecoration='underline'; this.style.color='#ffc107'" onmouseout="this.style.textDecoration='none'; this.style.color='#f8f9fa'">Chính sách giao hàng</a></p>
+                </div>
+            </div>
+
+            <!-- Bản đồ -->
+            <div style="margin-top: 40px;">
+                <h5 style="margin-bottom: 15px;">Vị trí cửa hàng</h5>
+                <iframe src="https://www.google.com/maps?q=140+Lê+Trọng+Tấn,+Tân+Phú,+TP+HCM&output=embed"
+                        style="width: 100%; height: 250px; border: 0; border-radius: 8px;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
+            <!-- Copyright & Payment -->
+            <div style="margin-top: 30px; text-align: center;">
+                <p style="margin-bottom: 10px;">© Bản quyền © 2025 PetShop. Bản đồ chỉ mang tính minh họa.</p>
+            </div>
+        </div>
+    </footer>
+    <!-- FOOTER -->
+    <!-- Bootstrap JS -->
+</body>
+</html>
+
+

@@ -1,0 +1,45 @@
+﻿@model List<tblHoaDon>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Danh sách đơn hàng</h2>
+@if (TempData["ThongBao"] != null)
+{
+    <div class="alert alert-success" id="alertMsg"> @TempData["ThongBao"] </div>
+    <script>
+        setTimeout(function () {
+            var box = document.getElementById("alertMsg");
+            if (box) {
+                box.style.transition = "opacity 0.8s";
+                box.style.opacity = 0;
+                setTimeout(() => box.remove(), 800);
+            }
+        }, 2000);// sau khoảng 2s thì thông báo tắt
+    </script>
+}
+<table class="table table-bordered">
+    <tr>
+        <th>Mã đơn</th>
+        <th>Khách hàng</th>
+        <th>Ngày lập</th>
+        <th>Tổng tiền</th>
+        <th>Tình trạng</th>
+        <th>Thao tác</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.MaHD</td>
+            <td>@item.tblKhachHang.TenKH</td>
+            <td>@item.NgayLap</td>
+            <td>@item.TongTien</td>
+            <td> @(item.tblTinhTrang != null ? item.tblTinhTrang.TinhTrangDonHang: "Chưa cập nhật")</td>
+            <td>
+                <a href="@Url.Action("CapNhat", "CapNhatDH", new { id = item.MaHD })" class="btn btn-primary btn-sm"> Cập nhật</a>
+            </td>
+        </tr>
+    }
+</table>
+

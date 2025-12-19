@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="799458d9a593423687367eb66c0b2ef8" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_PetShopModel.tblBinhLuan" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblChiTietHoaDon" Width="1.5" PointX="8.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblChiTietHoaDonDichVu" Width="1.5" PointX="8.25" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblDanhMuc" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblDichVu" Width="1.5" PointX="6" PointY="23" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblHinhAnh" Width="1.5" PointX="5.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblHoaDon" Width="1.5" PointX="6" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblHoaDonDichVu" Width="1.5" PointX="6" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblKhachHang" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblMaGiamGia" Width="1.5" PointX="3.75" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblNhaCungCap" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblNhanVien" Width="1.5" PointX="3.75" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblSanPham" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblTinhTrang" Width="1.5" PointX="3.75" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblTonKho" Width="1.5" PointX="5.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_PetShopModel.tblVaiTro" Width="1.5" PointX="1.5" PointY="21.625" IsExpanded="true" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblBinhLuan_tblSanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblChiTietHoaDon_tblHoaDon" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblChiTietHoaDon_tblSanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblChiTietHoaDonDichVu_tblDichVu" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblChiTietHoaDonDichVu_tblHoaDonDichVu" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblSanPham_tblDanhMuc" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHinhAnh_tblSanPham" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHoaDon_tblKhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHoaDon_tblMaGiamGia" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHoaDon_tblNhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHoaDon_tblTinhTrang" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHoaDonDichVu_tblKhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblHoaDonDichVu_tblNhanVien" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblSanPham_tblNhaCungCap" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblNhanVien_tblVaiTro" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_PetShopModel.FK_tblTonKho_tblSanPham" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
