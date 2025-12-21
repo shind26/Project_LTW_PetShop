@@ -1,0 +1,35 @@
+﻿@model LapTrinhWeb.tblNhanVien
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.MaNV)
+
+    <div class="card p-4 border-warning shadow-sm">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Tên nhân viên (Không được sửa):</label>
+                <input type="text" class="form-control" value="@Model.TenNV" readonly disabled />
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold text-primary">Chọn vai trò mới:</label>
+                @Html.DropDownList("VaiTro", null, htmlAttributes: new { @class = "form-select border-primary" })
+            </div>
+        </div>
+
+        <div class="alert alert-info small">
+            * Theo quy định, bạn chỉ được phép thay đổi <strong>Vai trò</strong> của nhân viên tại đây.
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-warning">Xác nhận thay đổi</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Hủy</a>
+        </div>
+    </div>
+}
+

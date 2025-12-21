@@ -1,0 +1,69 @@
+﻿@model IEnumerable<LapTrinhWeb.tblHoaDon>
+@{
+    ViewBag.Title = "XemDonHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-info text-white py-3 d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">LỊCH SỬ ĐƠN HÀNG: @ViewBag.TenKhachHang</h5>
+        <a href="@Url.Action("Index")" class="btn btn-light btn-sm">Quay lại</a>
+    </div>
+    <div class="card-body">
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <p class="text-muted">Khách hàng này chưa có đơn hàng nào.</p>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Mã HĐ</th>
+                            <th>Ngày lập</th>
+                            <th>Địa chỉ giao hàng</th>
+                            <th>Tổng tiền</th>
+                            <th>Thanh toán</th>
+                            <th>Tình trạng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var hd in Model)
+                        {
+                            <tr>
+                                <td class="fw-bold">@hd.MaHD</td>
+                                <td>@(hd.NgayLap.HasValue ? hd.NgayLap.Value.ToString("dd/MM/yyyy HH:mm") : "-")</td>
+                                <td class="small">@hd.DiaChiGiaoHang</td>
+                                <td class="text-danger fw-bold">@string.Format("{0:N0} VNĐ", hd.TongTien)</td>
+                                <td>
+                                    @if (hd.DaThanhToan == true)
+                                    {
+                                        <span class="text-success"><i class="fas fa-check-circle"></i> Đã thanh toán</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-warning"><i class="fas fa-clock"></i> Chờ thanh toán</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (hd.tblTinhTrang != null)
+                                    {
+                                        @hd.tblTinhTrang.TinhTrangDonHang
+                                    }
+                                    else
+                                    {
+                                        <span>Đang xử lý</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
+

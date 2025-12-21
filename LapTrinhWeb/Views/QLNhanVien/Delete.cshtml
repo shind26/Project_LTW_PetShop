@@ -1,0 +1,29 @@
+﻿@model LapTrinhWeb.tblNhanVien
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="alert alert-danger">
+        <h4>Xác nhận xóa nhân viên này?</h4>
+        <p>Hành động này không thể hoàn tác.</p>
+    </div>
+
+    <dl class="row bg-light p-3 border">
+        <dt class="col-sm-3">Tên nhân viên</dt>
+        <dd class="col-sm-9">@Model.TenNV</dd>
+
+        <dt class="col-sm-3">Vai trò hiện tại</dt>
+        <dd class="col-sm-9">@(Model.tblVaiTro != null ? Model.tblVaiTro.TenVaiTro : "N/A")</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input type="submit" value="Xóa ngay" class="btn btn-danger" />
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Quay lại</a>
+    }
+</div>
+

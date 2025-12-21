@@ -1,0 +1,59 @@
+﻿
+@model IEnumerable<LapTrinhWeb.tblKhachHang>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+        }
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th class="text-center">Họ tên khách hàng</th>
+                        <th class="text-center">Số điện thoại</th>
+                        <th class="text-center">Địa chỉ</th>
+                        <th class="text-center">Đơn hàng</th>
+                        <th class="text-center">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div>
+                                        <div class="fw-bold">@item.TenKH</div>
+                                        <small class="text-muted">@item.Email</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>@item.DienThoai</td>
+                            <td class="small">@item.DiaChi</td>
+                            <td class="text-center">
+                                <span class="badge bg-secondary">@item.tblHoaDon.Count</span>
+                            </td>
+                            <td class="text-end">
+                                <a href="@Url.Action("XemDonHang", new { id = item.MaKH })" class="btn btn-sm btn-info text-white">
+                                    Xem đơn hàng
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

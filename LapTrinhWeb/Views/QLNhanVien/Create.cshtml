@@ -1,0 +1,44 @@
+﻿@model LapTrinhWeb.tblNhanVien
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Thêm nhân viên mới</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="card p-4 shadow-sm">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label>Họ tên</label>
+                @Html.EditorFor(model => model.TenNV, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            </div>
+            <div class="col-md-6 mb-3">
+                <label>Mật khẩu</label>
+                @Html.PasswordFor(model => model.MatKhau, new { @class = "form-control", required = "required" })
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Giới tính</label>
+                @Html.DropDownListFor(model => model.GioiTinh, new SelectList(new[] { "Nam", "Nữ", "Khác" }), "-- Chọn --", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Năm sinh</label>
+                @Html.EditorFor(model => model.NamSinh, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+            </div>
+            <div class="col-md-4 mb-3">
+                <label>Vai trò</label>
+                @Html.DropDownList("VaiTro", null, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success">Lưu lại</button>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </div>
+}
+

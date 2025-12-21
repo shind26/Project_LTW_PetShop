@@ -133,6 +133,8 @@
     <Compile Include="Controllers\DangNhapController.cs" />
     <Compile Include="Controllers\GioHangController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\QLKhachHangController.cs" />
+    <Compile Include="Controllers\QLNhanVienController.cs" />
     <Compile Include="Controllers\SanPhamController.cs" />
     <Compile Include="Controllers\ThongKeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -401,14 +403,16 @@
     <Content Include="Views\CTSanPham\ChiTiet.cshtml" />
     <Content Include="Views\GioHang\Index.cshtml" />
     <Content Include="Views\GioHang\DatHang.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\SanPham.cshtml" />
-    <Content Include="Views\Admin\SanPhamCreate.cshtml" />
-    <Content Include="Views\Admin\SanPhamDelete.cshtml" />
-    <Content Include="Views\Admin\SanPhamEdit.cshtml" />
+    <Content Include="Views\QLNhanVien\Index.cshtml" />
+    <Content Include="Views\QLNhanVien\Create.cshtml" />
+    <Content Include="Views\QLNhanVien\Edit.cshtml" />
+    <Content Include="Views\QLNhanVien\Delete.cshtml" />
+    <Content Include="Views\QLKhachHang\Index.cshtml" />
+    <Content Include="Views\QLKhachHang\XemDonHang.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
